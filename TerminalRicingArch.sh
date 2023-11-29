@@ -191,7 +191,7 @@ install_navi() {
 }
 
 echo "Ricing base install"
-sudo pacman -S nerd-fonts zsh fasd peco acpi
+sudo pacman -S zsh fasd peco acpi
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 git clone https://github.com/spaceship-prompt/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" --depth=1
 ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
