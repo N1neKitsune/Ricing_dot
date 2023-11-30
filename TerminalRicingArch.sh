@@ -203,15 +203,14 @@ install_navi() {
     sudo pacman -S navi
 }
 
-#############################################
-#############################################
-#############################################
-gum style --foreground="#FFF" --border-foreground="#FFF" --border double --align center --padding "1 1" "Base Package"
+################################################
+
+gum style --foreground="#239B56" --border-foreground="#239B56" --border double --align center --padding "1 1" "Base Package"
 for pkg in zsh fasd peco acpi gum; do
     if ! pacman -Qi $pkg &> /dev/null; then
         sudo pacman -S $pkg
     else
-        echo "$pkg is already installed."
+        echo "$pkg is already installed." | gum style --foreground="#F5B041" --border-foreground="#F5B041" --border rounded --align center
     fi
 done
 
@@ -220,7 +219,7 @@ if [ ! -d "$HOME/.oh-my-zsh" ]; then
     sed -i 's/exec zsh -l//g' install_oh_my_zsh.sh
     sh install_oh_my_zsh.sh
 else
-    echo "Oh My Zsh is already installed."
+    echo "Oh My Zsh is already installed." | gum style --foreground="#F5B041" --border-foreground="#F5B041" --border rounded --align center
 fi
 
 ZSH_CUSTOM=${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}
@@ -238,7 +237,7 @@ for item in "${themes_and_plugins[@]}"; do
     if [ ! -d "$ZSH_CUSTOM/${ADDR[0]}" ]; then
         git clone "${ADDR[1]}" "$ZSH_CUSTOM/${ADDR[0]}" --depth=1
     else
-        echo "${ADDR[0]} is already cloned."
+        echo "${ADDR[0]} is already cloned." | gum style --foreground="#F5B041" --border-foreground="#F5B041" --border rounded --align center
     fi
 done
 
@@ -296,14 +295,16 @@ SPACESHIP_TIME_FORMAT='%D{%H:%M}'
 SPACESHIP_TIME_COLOR=red
 EOF
 
-gum style --foreground="#FFF" --border-foreground="#FFF" --border double --align center --padding "1 1" "Extended Tools"
+####################################
+
+gum style --foreground="#239B56" --border-foreground="#239B56" --border double --align center --padding "1 1" "Extended Tools"
 if [ "$auto" = "Auto" ]; then
     pacman_packages=(bottom nnn ncdu ssh-tools pueue gping bat navi rust k9s neofetch go)
     for pkg in "${pacman_packages[@]}"; do
         if ! pacman -Qi $pkg &> /dev/null; then
             (gum spin --spinner moon --title.foreground="#F00" --title "Installing : $pkg" sudo pacman -S $pkg --noconfirm)
         else
-            echo "$pkg est déjà installé." | gum style --foreground="#3498DB" --border-foreground="#3498DB" --border rounded --align center
+            echo "$pkg est déjà installé." | gum style --foreground="#F5B041" --border-foreground="#F5B041" --border rounded --align center
         fi
     done
     declare -A custom_installs=(
@@ -324,9 +325,9 @@ if [ "$auto" = "Auto" ]; then
     )
     for key in "${!custom_installs[@]}"; do
         if declare -f "${custom_installs[$key]}" > /dev/null; then
-            (gum spin --spinner moon --title.foreground="#F00" --title "Installing : $key" "${custom_installs[$key]}")
+            (gum spin --spinner moon --title.foreground="#239B56" --title "Installing : $key" "${custom_installs[$key]}")
         else
-            echo "La fonction ${custom_installs[$key]} n'existe pas pour l'installation de $key." | gum style --foreground="#3498DB" --border-foreground="#3498DB" --border rounded --align center
+            echo "La fonction ${custom_installs[$key]} n'existe pas pour l'installation de $key." | gum style --foreground="#C0392B" --border-foreground="#C0392B" --border rounded --align center
         fi
     done
 else
