@@ -40,55 +40,36 @@ cat << "EOF"
                                            __/ |                                  
                                           |___/                                                                                                            
 EOF
-if ! pacman -Qi gum &> /dev/null; then
-    pacman -S --needed --noconfirm gum > /dev/null
+if ! command -v gum &> /dev/null; then
+    sudo mkdir -p /etc/apt/keyrings
+    curl -fsSL https://repo.charm.sh/apt/gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/charm.gpg
+    echo "deb [signed-by=/etc/apt/keyrings/charm.gpg] https://repo.charm.sh/apt/ * *" | sudo tee /etc/apt/sources.list.d/charm.list
+    sudo apt update -y && sudo apt install -y gum
 fi
 
 echo "Auto or Personnalized"
 auto=$(gum choose --cursor.foreground="#F00" --height 2 --limit 1 Auto Personnalized)
 
 if [ "$auto" = "Personnalized" ]; then
-IFS=$'\n' read -r -d '' -a choices < <(gum choose --cursor.foreground="#F00" --height 27 --limit 27 "YAY (Yet Another Yogurt - An AUR Helper)" "HUNT (A simplified Find command made with Rust)" "DOOIT (A todo manager)" "PLOW (An HTTP(S) benchmarking tool)" "CATP (Print the output of a running process)" "CURL-IMPERSONATE (A special build of curl)" "NTFY (Send push notifications to your phone or desktop)" "JQP (A TUI playground for exploring jq)" "K9S (Kubernetes CLI)" "NNN (A full-featured terminal file manager)" "NCDU (A disk utility for Unix systems)" "SSH-TOOLS (Making SSH more convenient)" "NALA (A front-end for libapt-pkg)" "NEOFETCH (A command-line system information tool)" "OTS (Share end-to-end encrypted secrets)" "BOTTOM (A graphical process/system monitor)" "VIDDY (A modern watch command)" "HTMLQ (Like jq, but for HTML)" "SYSZ (A terminal UI for systemctl)" "PUEUE (A command-line task management tool)" "VIZEX (Visualize disk space usage)" "GPING (Ping, but with a graph)" "TEMPMAIL (A temporary email right from your terminal)" "BAT (A cat clone with syntax highlighting)" "NAVI (An interactive cheatsheet tool)" "MILLER (Like awk, sed, cut, join, and sort for data formats)" && printf '\0')
+IFS=$'\n' read -r -d '' -a choices < <(gum choose --cursor.foreground="#F00" --height 27 --limit 27 "HUNT (A simplified Find command made with Rust)" "PLOW (An HTTP(S) benchmarking tool)" "CATP (Print the output of a running process)" "CURL-IMPERSONATE (A special build of curl)" "NTFY (Send push notifications to your phone or desktop)" "K9S (Kubernetes CLI)" "NNN (A full-featured terminal file manager)" "NCDU (A disk utility for Unix systems)" "SSH-TOOLS (Making SSH more convenient)" "NALA (A front-end for libapt-pkg)" "NEOFETCH (A command-line system information tool)" "OTS (Share end-to-end encrypted secrets)" "VIDDY (A modern watch command)" "HTMLQ (Like jq, but for HTML)" "SYSZ (A terminal UI for systemctl)" "GPING (Ping, but with a graph)" "BAT (A cat clone with syntax highlighting)" "MILLER (Miller is like awk, sed, cut, join, and sort for data formats)" && printf '\0')
 fi
-
-# Function to install YAY
-install_yay() {
-    if ! command -v yay &> /dev/null; then
-        sudo gum spin --spinner moon --title.foreground="#239B56" --title "Installing : git base-devel" -- bash -c "pacman -S --needed --noconfirm git base-devel"
-        git clone https://aur.archlinux.org/yay.git
-        cd yay && makepkg -si && cd .. && rm -rf yay
-    else
-        echo "YAY is already installed." | gum style --foreground="#F5B041" --border-foreground="#F5B041" --border rounded --align center
-    fi
-}
 
 # Function to install HUNT
 install_hunt() {
     if ! command -v cargo &> /dev/null; then
-        sudo gum spin --spinner moon --title.foreground="#239B56" --title "Installing : rust" -- bash -c "pacman -S --needed --noconfirm rust"
+        sudo gum spin --spinner moon --title.foreground="#239B56" --title "Installing : rust" -- bash -c "apt install -y rustc"
     fi
-    if ! command -V hunt &> /dev/null; then
+    if ! command -v hunt &> /dev/null; then
         cargo install hunt
     else 
         echo "Hunt is already installed." | gum style --foreground="#F5B041" --border-foreground="#F5B041" --border rounded --align center
     fi
 }
 
-# Function to install DOOIT
-install_dooit() {
-    install_yay
-    if ! pacman -Qi dooit-git &> /dev/null; then
-        yay -S --noconfirm dooit-git
-    else
-        echo "dooit-git is already installed." | gum style --foreground="#F5B041" --border-foreground="#F5B041" --border rounded --align center
-    fi
-}
-
 # Function to install PLOW
 install_plow() {
-    install_yay
-    if ! pacman -Qi plow &> /dev/null; then
-        yay -S --noconfirm plow
+    if ! command -v plow &> /dev/null; then
+        go install github.com/six-ddc/plow@latest
     else
         echo "plow is already installed." | gum style --foreground="#F5B041" --border-foreground="#F5B041" --border rounded --align center
     fi
@@ -107,7 +88,7 @@ install_catp() {
 # Function to install CURL-IMPERSONATE
 install_curl_impersonate() {
     if ! command -v curl_chrome100 &> /dev/null; then
-        sudo pacman -S --needed --noconfirm  nss ca-certificates wget
+        sudo apt install -y libnss3 ca-certificates wget
         sudo wget https://github.com/lwthiker/curl-impersonate/releases/download/v0.6.0-alpha.1/curl-impersonate-v0.6.0-alpha.1.aarch64-linux-gnu.tar.gz -O /usr/local/bin/curl-imp.tar.gz
         sudo tar -xvf /usr/local/bin/curl-imp.tar.gz -C /usr/local/bin && sudo chmod +x /usr/local/bin/curl* && sudo rm /usr/local/bin/curl-imp.tar.gz
     else 
@@ -117,52 +98,53 @@ install_curl_impersonate() {
 
 # Function to install NTFY
 install_ntfy() {
-    install_yay
-    if ! pacman -Qi ntfysh-bin &> /dev/null; then
-        yay -S --noconfirm ntfysh-bin
+    if ! command -v ntfy &> /dev/null; then
+        sudo mkdir -p /etc/apt/keyrings
+        curl -fsSL https://archive.heckel.io/apt/pubkey.txt | sudo gpg --dearmor -o /etc/apt/keyrings/archive.heckel.io.gpg
+        sudo apt install -y apt-transport-https
+        sudo sh -c "echo 'deb [arch=amd64 signed-by=/etc/apt/keyrings/archive.heckel.io.gpg] https://archive.heckel.io/apt debian main' > /etc/apt/sources.list.d/archive.heckel.io.list"  
+        sudo apt update -y
+        sudo apt install -y ntfy
+        sudo systemctl enable ntfy
+        sudo systemctl start ntfy
     else
         echo "ntfysh-bin is already installed." | gum style --foreground="#F5B041" --border-foreground="#F5B041" --border rounded --align center
     fi
 }
 
-# Function to install JQP
-install_jqp() {
-    install_yay
-    if ! pacman -Qi jqp-bin &> /dev/null; then
-        yay -S --noconfirm jqp-bin
-    else
-        echo "jqp-bin is already installed." | gum style --foreground="#F5B041" --border-foreground="#F5B041" --border rounded --align center
-    fi    
-}
-
 # Function to install K9S
 install_k9s() {
-    sudo gum spin --spinner moon --title.foreground="#239B56" --title "Installing : k9s" -- bash -c "pacman -S --needed --noconfirm k9s"
+    if ! command -v k9s &> /dev/null; then
+        go install github.com/derailed/k9s@latest
+    else
+        echo "k9s is already installed." | gum style --foreground="#F5B041" --border-foreground="#F5B041" --border rounded --align center
+    fi
 }
 
 # Function to install NEOFETCH
 install_neofetch() {
-    sudo gum spin --spinner moon --title.foreground="#239B56" --title "Installing : neofetch" -- bash -c "pacman -S --needed --noconfirm neofetch"
+    sudo gum spin --spinner moon --title.foreground="#239B56" --title "Installing : neofetch" -- bash -c "apt install -y neofetch"
 }
 
 # Function to install OTS
 install_ots() {
-    if ! command -v go &> /dev/null; then
-        sudo gum spin --spinner moon --title.foreground="#239B56" --title "Installing : go" -- bash -c "pacman -S --needed --noconfirm go"
-    fi
-    sudo go install github.com/sniptt-official/ots@latest
+    if ! command -v ots &> /dev/null; then
+        go install github.com/sniptt-official/ots@latest
+    else
+        echo "ots is already installed." | gum style --foreground="#F5B041" --border-foreground="#F5B041" --border rounded --align center
+    fi  
 }
 
 # Function to install BOTTOM
 install_bottom() {
-    sudo gum spin --spinner moon --title.foreground="#239B56" --title "Installing : bottom" -- bash -c "pacman -S --needed --noconfirm bottom"
+    curl -LO https://github.com/ClementTsang/bottom/releases/download/0.9.6/bottom_0.9.6_amd64.deb
+    sudo dpkg -i bottom_0.9.6_amd64.deb
 }
 
 # Function to install VIDDY
 install_viddy() {
-    install_yay
-    if ! pacman -Qi viddy &> /dev/null; then
-        yay -S --noconfirm viddy
+    if ! command -v viddy &> /dev/null; then
+        go install github.com/sachaos/viddy@latest
     else
         echo "viddy is already installed." | gum style --foreground="#F5B041" --border-foreground="#F5B041" --border rounded --align center
     fi  
@@ -171,86 +153,69 @@ install_viddy() {
 # Function to install HTMLQ
 install_htmlq() {
     if ! command -v cargo &> /dev/null; then
-        sudo gum spin --spinner moon --title.foreground="#239B56" --title "Installing : rust" -- bash -c "pacman -S --needed --noconfirm rust"
+        sudo gum spin --spinner moon --title.foreground="#239B56" --title "Installing : rust" -- bash -c "apt install -y rustc"
     fi
-    cargo install htmlq
+    if ! command -v htmlq &> /dev/null; then
+        cargo install htmlq
+    else 
+        echo "htmlq is already installed." | gum style --foreground="#F5B041" --border-foreground="#F5B041" --border rounded --align center
+    fi
 }
 
 # Function to install SYSZ
 install_sysz() {
     install_yay
-    if ! pacman -Qi sysz &> /dev/null; then
-        yay -S --noconfirm sysz
+    if ! command -v sysz &> /dev/null; then
+        sudo wget -O /usr/local/bin/sysz https://github.com/joehillen/sysz/releases/latest/download/sysz
+        sudo chmod +x /usr/local/bin/sysz
     else
         echo "sysz is already installed." | gum style --foreground="#F5B041" --border-foreground="#F5B041" --border rounded --align center
     fi
 }
 
-# Function to install PUEUE
-install_pueue() {
-    sudo gum spin --spinner moon --title.foreground="#239B56" --title "Installing : pueue" -- bash -c "pacman -S --needed --noconfirm pueue"
-}
-
-# Function to install VIZEX
-install_vizex() {
-    install_yay
-    if ! pacman -Qi vizex &> /dev/null; then
-        yay -S --noconfirm vizex
-    else
-        echo "vizex is already installed." | gum style --foreground="#F5B041" --border-foreground="#F5B041" --border rounded --align center
-    fi
+# Function to install MILLER
+install_miller() {
+    sudo gum spin --spinner moon --title.foreground="#239B56" --title "Installing : pueue" -- bash -c "apt-get install -y miller"
 }
 
 # Function to install GPING
 install_gping() {
-    sudo gum spin --spinner moon --title.foreground="#239B56" --title "Installing : gping" -- bash -c "pacman -S --needed --noconfirm gping"
-}
-
-# Function to install TEMPMAIL
-install_tempmail() {
-    install_yay
-    if ! pacman -Qi tmpmail-git &> /dev/null; then
-        yay -S --noconfirm tmpmail-git
-    else
-        echo "tmpmail-git is already installed." | gum style --foreground="#F5B041" --border-foreground="#F5B041" --border rounded --align center
-    fi
+    echo "deb [signed-by=/usr/share/keyrings/azlux-archive-keyring.gpg] http://packages.azlux.fr/debian/ stable main" | sudo tee /etc/apt/sources.list.d/azlux.list
+    sudo wget -O /usr/share/keyrings/azlux-archive-keyring.gpg  https://azlux.fr/repo.gpg
+    sudo apt update -y
+    sudo gum spin --spinner moon --title.foreground="#239B56" --title "Installing : gping" -- bash -c "apt install -y gping"
 }
 
 # Function to install BAT
 install_bat() {
-    sudo gum spin --spinner moon --title.foreground="#239B56" --title "Installing : bat" -- bash -c "pacman -S --needed --noconfirm bat"
-}
-
-# Function to install NAVI
-install_navi() {
-    sudo gum spin --spinner moon --title.foreground="#239B56" --title "Installing : navi" -- bash -c "pacman -S --needed --noconfirm navi"
+    sudo gum spin --spinner moon --title.foreground="#239B56" --title "Installing : bat" -- bash -c "apt install -y bat"
 }
 
 # Function to install SSH-TOOLS
 install_ssh_tools(){
-    sudo gum spin --spinner moon --title.foreground="#239B56" --title "Installing : ssh-tools" -- bash -c "pacman -S --needed --noconfirm ssh-tools"
+    sudo gum spin --spinner moon --title.foreground="#239B56" --title "Installing : ssh-tools" -- bash -c "apt install -y ssh-tools"
 }
 
 # Function to install NCDU
 install_ncdu(){
-    sudo gum spin --spinner moon --title.foreground="#239B56" --title "Installing : ncdu" -- bash -c "pacman -S --needed --noconfirm ncdu"
+    sudo gum spin --spinner moon --title.foreground="#239B56" --title "Installing : ncdu" -- bash -c "apt install -y ncdu"
 }
 
 # Function to install NNN
 install_nnn(){
-    sudo gum spin --spinner moon --title.foreground="#239B56" --title "Installing : nnn" -- bash -c "pacman -S --needed --noconfirm nnn"
+    sudo gum spin --spinner moon --title.foreground="#239B56" --title "Installing : nnn" -- bash -c "apt install -y nnn"
 }
 
-# Function to install MILLER
-install_miller(){
-    sudo gum spin --spinner moon --title.foreground="#239B56" --title "Installing : nnn" -- bash -c "pacman -S --needed --noconfirm miller"
+# Function to install NALA
+install_nala(){
+    sudo gum spin --spinner moon --title.foreground="#239B56" --title "Installing : nala" -- bash -c "apt install -y nala"
 }
 ################################################
 
 gum style --foreground="#239B56" --border-foreground="#239B56" --border double --align center --padding "1 1" "Base Package"
-for pkg in zsh fasd peco acpi gum; do
-    if ! pacman -Qi $pkg &> /dev/null; then
-        (sudo gum spin --spinner moon --title.foreground="#239B56" --title "Installing : $pkg" -- bash -c "pacman -S --needed --noconfirm $pkg")
+for pkg in zsh fasd peco acpi; do
+    if ! command -v $pkg &> /dev/null; then
+        (sudo gum spin --spinner moon --title.foreground="#239B56" --title "Installing : $pkg" -- bash -c "apt install -y $pkg")
     else
         echo "$pkg is already installed." | gum style --foreground="#F5B041" --border-foreground="#F5B041" --border rounded --align center
     fi
@@ -341,29 +306,25 @@ EOF
 
 gum style --foreground="#239B56" --border-foreground="#239B56" --border double --align center --padding "1 1" "Extended Tools"
 if [ "$auto" = "Auto" ]; then
-    pacman_packages=(bottom nnn ncdu ssh-tools pueue gping bat navi rust k9s neofetch go miller)
-    for pkg in "${pacman_packages[@]}"; do
-        if ! pacman -Qi $pkg &> /dev/null; then
-            (sudo gum spin --spinner moon --title.foreground="#239B56" --title "Installing : $pkg" -- bash -c "pacman -S --needed --noconfirm $pkg")
-        else
-            echo "$pkg is already installed." | gum style --foreground="#F5B041" --border-foreground="#F5B041" --border rounded --align center
-        fi
-    done
     declare -A custom_installs=(
-        ["yay"]="install_yay"
         ["hunt"]="install_hunt"
-        ["dooit"]="install_dooit"
         ["plow"]="install_plow"
         ["catp"]="install_catp"
         ["curl_impersonate"]="install_curl_impersonate"
         ["ntfy"]="install_ntfy"
-        ["jqp"]="install_jqp"
+        ["k9s"]="install_k9s"
+        ["nnn"]="install_nnn"
+        ["ncdu"]="install_ncdu"
+        ["ssh-tools"]="install_ssh_tools"
+        ["nala"]="install_nala"
+        ["neofetch"]="install_neofetch"
         ["ots"]="install_ots"
         ["viddy"]="install_viddy"
         ["htmlq"]="install_htmlq"
         ["sysz"]="install_sysz"
-        ["vizex"]="install_vizex"
-        ["tempmail"]="install_tempmail"
+        ["gping"]="install_gping"
+        ["bat"]="install_bat"
+        ["miller"]="install_miller"
     )
     for key in "${!custom_installs[@]}"; do
         if declare -f "${custom_installs[$key]}" > /dev/null; then
@@ -375,38 +336,30 @@ if [ "$auto" = "Auto" ]; then
 else
     for choice in "${choices[@]}"; do
         case "$choice" in
-            "YAY (Yet Another Yogurt - An AUR Helper)") install_yay ;;
             "HUNT (A simplified Find command made with Rust)") install_hunt ;;
-            "DOOIT (A todo manager)") install_dooit ;;
             "PLOW (An HTTP(S) benchmarking tool)") install_plow ;;
             "CATP (Print the output of a running process)") install_catp ;;
             "CURL-IMPERSONATE (A special build of curl)") install_curl_impersonate ;;
             "NTFY (Send push notifications to your phone or desktop)") install_ntfy ;;
-            "JQP (A TUI playground for exploring jq)") install_jqp ;;
             "K9S (Kubernetes CLI)") install_k9s ;;
             "NNN (A full-featured terminal file manager)") install_nnn ;;
             "NCDU (A disk utility for Unix systems)") install_ncdu ;;
             "SSH-TOOLS (Making SSH more convenient)") install_ssh_tools ;;
-            "NALA (A front-end for libapt-pkg)") echo "Nala is only for APT (Debian/Ubuntu systems)." ;;
+            "NALA (A front-end for libapt-pkg)") install_nala ;;
             "NEOFETCH (A command-line system information tool)") install_neofetch ;;
             "OTS (Share end-to-end encrypted secrets)") install_ots ;;
-            "BOTTOM (A graphical process/system monitor)") install_bottom ;;
             "VIDDY (A modern watch command)") install_viddy ;;
             "HTMLQ (Like jq, but for HTML)") install_htmlq ;;
             "SYSZ (A terminal UI for systemctl)") install_sysz ;;
-            "PUEUE (A command-line task management tool)") install_pueue ;;
-            "VIZEX (Visualize disk space usage)") install_vizex ;;
             "GPING (Ping, but with a graph)") install_gping ;;
-            "TEMPMAIL (A temporary email right from your terminal)") install_tempmail ;;
             "BAT (A cat clone with syntax highlighting)") install_bat ;;
-            "NAVI (An interactive cheatsheet tool)") install_navi ;;
             "MILLER (Miller is like awk, sed, cut, join, and sort for data formats)") install_miller ;;
             *) echo "Invalid choice: $choice" | gum style --foreground="#C0392B" --border-foreground="#C0392B" --border rounded --align center ;;
         esac
     done
 fi
 
-gum style --foreground="#239B56" --border-foreground="#239B56" --border double --align center --padding "1 2" "Install complet."
+gum style --foreground="#239B56" --border-foreground="#239B56" --border double --align center --padding "1 2" "Installation complete."
 
 if [ "$(getent passwd $USER | cut -d: -f7)" != "/bin/zsh" ]; then
     chsh -s /bin/zsh
