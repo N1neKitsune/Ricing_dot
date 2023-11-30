@@ -356,21 +356,41 @@ do
         25) install_bat ;;
         26) install_navi ;;
         27) 
-            sudo pacman -S bottom nnn ncdu ssh-tools pueue gping bat navi rust k9s neofetch go
-            install_yay
-            install_hunt
-            install_dooit
-            install_plow
-            install_catp
-            install_curl_impersonate
-            install_ntfy
-            install_jqp
-            install_ots
-            install_viddy
-            install_htmlq
-            install_sysz
-            install_vizex
-            install_tempmail
+            pacman_packages=(bottom nnn ncdu ssh-tools pueue gping bat navi rust k9s neofetch go)
+            for pkg in "${pacman_packages[@]}"; do
+                if ! pacman -Qi $pkg &> /dev/null; then
+                    echo "Installation de $pkg..."
+                    sudo pacman -S $pkg --noconfirm > /dev/null
+                else
+                    echo "$pkg est déjà installé."
+                fi
+            done
+
+            declare -A custom_installs=(
+                ["yay"]="install_yay"
+                ["hunt"]="install_hunt"
+                ["dooit"]="install_dooit"
+                ["plow"]="install_plow"
+                ["catp"]="install_catp"
+                ["curl_impersonate"]="install_curl_impersonate"
+                ["ntfy"]="install_ntfy"
+                ["jqp"]="install_jqp"
+                ["ots"]="install_ots"
+                ["viddy"]="install_viddy"
+                ["htmlq"]="install_htmlq"
+                ["sysz"]="install_sysz"
+                ["vizex"]="install_vizex"
+                ["tempmail"]="install_tempmail"
+            )
+
+            for key in "${!custom_installs[@]}"; do
+                if declare -f "${custom_installs[$key]}" > /dev/null; then
+                    echo "Installation de $key..."
+                    "${custom_installs[$key]}" > /dev/null
+                else
+                    echo "La fonction ${custom_installs[$key]} n'existe pas pour l'installation de $key."
+                fi
+            done
             ;;
         *) echo "Invalid choice: $choice" ;;
     esac
