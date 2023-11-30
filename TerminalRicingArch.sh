@@ -406,4 +406,3 @@ if [ "$(getent passwd $USER | cut -d: -f7)" != "/bin/zsh" ]; then
     chsh -s /bin/zsh
 fi
 exec zsh -l
-
