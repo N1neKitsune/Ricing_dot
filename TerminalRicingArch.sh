@@ -1,27 +1,35 @@
 #!/bin/bash
 cat << "EOF"
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣷⣦⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⣿⣿⣿⣿⣿⣿⣷⣤⣀⠀⠀⠀⠀⠀⠉⠑⣶⣤⣄⣀⣠⣤⣶⣶⣿⣿⣿⣿⡇⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿⡿⠟⠋⠁⠀⠀⠀⣀⠤⠒⠉⠈⢉⡉⠻⢿⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀
-⠀⠀⠀⠀⣀⣴⣶⣿⣷⡄⠀⠀⠀⠀⢹⣿⣿⣿⣿⠏⠁⠀⢀⠄⠀⠀⠈⢀⠄⠀⢀⡖⠁⠀⢀⠀⠈⠻⣿⣿⣿⣿⡏⠀⠀⠀⠀
-⠀⠀⢠⣾⣿⣿⣿⣿⡿⠁⠀⠀⠀⠀⢸⣿⣿⠏⠀⠀⢀⡴⠁⠀⠀⣠⠖⠁⢀⠞⠋⠀⢠⡇⢸⡄⠀⠀⠈⢻⣿⣿⠁⠀⠀⠀⠀
-⠀⣠⣿⣿⣿⣿⣿⠟⠁⠀⠀⠀⠀⠀⢸⡿⠁⠀⠀⢀⡞⠀⠀⢀⡴⠃⠀⣰⠋⠀⠀⣰⡿⠀⡜⢳⡀⠘⣦⠀⢿⡇⠀⠀⠀⠀⠀
-⢠⣿⣿⣿⣿⡿⠃⠀⠀⠀⠀⠀⠀⢰⣿⠃⠀⢀⠆⡞⡄⠀⣠⡞⠁⣀⢾⠃⠀⣀⡜⢱⠇⣰⠁⠈⣷⠂⢸⡇⠸⣵⠀⠀⠀⠀⠀
-⣿⣿⣿⣿⡿⠁⠀⠀⠀⠀⠀⠀⢠⣿⠇⠀⠀⡜⣸⡟⢀⣴⡏⢠⣾⠋⡎⢀⣼⠋⢀⡎⡰⠃⠀⠀⣿⣓⢒⡇⠀⣿⠀⠀⠀⠀⠀
-⣿⣿⣿⣿⠇⠀⠀⠀⠀⠀⠀⠴⢻⣟⢀⣀⢀⣧⡇⢨⠟⢾⣔⡿⠃⢸⢀⠞⠃⢀⣾⡜⠁⠀⠀⠀⡏⠁⢠⠃⠀⢹⠀⠀⠀⠀⠀
-⣿⣿⣿⣿⡄⠀⠀⠀⠀⠀⠀⠀⢸⣼⢸⣿⡟⢻⣿⠿⣶⣿⣿⣿⣶⣾⣏⣀⣠⣾⣿⠔⠒⠉⠉⢠⠁⡆⡸⠀⡈⣸⠀⠀⠀⠀⠀
-⣿⣿⣿⣿⣇⠀⠀⠀⠀⠀⠀⠀⣸⣿⣸⣿⣇⢸⠃⡄⢻⠃⣾⣿⢋⠘⣿⣿⠏⣿⡟⣛⡛⢻⣿⢿⣶⣷⣿⣶⢃⣿⠀⠀⠀⠀⠀
-⢸⣿⣿⣿⣿⣆⠀⠀⠀⠀⠀⣰⠃⣿⣿⣿⣿⠀⣸⣧⠈⣸⣿⠃⠘⠃⢹⣿⠀⣿⠃⠛⠛⣿⡇⢸⣿⡇⢸⣿⡿⣿⡀⠀⠀⠀⠀
-⠀⠻⣿⣿⣿⣿⣦⡀⠀⢀⡔⣹⣼⡟⡟⣿⣿⣿⠛⠻⠶⠿⠷⣾⣿⣿⣬⣿⣠⣿⣀⣿⣿⣿⡇⠸⡿⠀⣾⡏⢠⣿⣇⠀⠀⠀⠀
-⠀⠀⠙⢿⣿⣿⣿⣿⣷⡞⢠⣿⢿⡇⣿⡹⡝⢿⡷⣄⠀⠀⠀⠀⠀⠀⠀⠉⠉⠉⠙⠛⠛⠻⠿⣶⣶⣾⣿⣇⣾⠉⢯⠃⠀⠀⠀
-⠀⠀⠀⠀⠙⠿⣿⣿⣿⠇⢸⠇⠘⣇⠸⡇⣿⣮⣳⡀⠉⠂⠀⠀⣀⣤⡤⢤⣀⠀⠀⠀⠀⠀⢈⣿⠟⣠⣾⠿⣿⡆⡄⣧⡀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠙⠻⡘⠾⣄⠀⠘⢦⣿⠃⠹⣿⣿⣶⠤⠀⠀⣿⠋⠉⠻⣿⠁⠀⠠⣀⣤⣾⣵⣾⡿⠃⣾⠏⣿⣧⠋⡇⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⣠⠖⠳⣄⡈⠃⠀⠼⠋⠙⢷⣞⢻⣿⣿⣀⡀⠈⠤⣀⠬⠟⠀⢀⣠⣶⠿⢛⡽⠋⣠⣾⣏⣠⡿⣃⣞⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⣧⠀⠀⠀⠉⠛⠓⠢⠶⣶⡤⠺⡟⢺⣿⠿⣿⣶⣤⣀⣠⣴⣾⡿⠿⢵⠋⠙⠲⣏⡝⠁⠀⣹⢿⡣⣌⠒⠄⠀
-⠀⠀⠀⠀⠀⠀⢸⠈⡄⠀⠇⠀⠀⡖⠁⢢⡞⠀⢰⠻⣆⡏⣇⠙⠻⣿⣿⣿⣿⠋⢀⡴⣪⢷⡀⠀⡘⠀⢀⠜⠁⢀⠟⢆⠑⢄⠀
-⠀⠀⠀⠀⠀⠀⠘⡄⠱⠀⠸⡀⠄⠳⡀⠀⢳⡀⢰⠀⢸⢇⡟⠑⠦⢈⡉⠁⢼⢠⡏⣴⠟⢙⠇⠀⡇⢠⠃⢀⡴⠁⠀⠘⠀⠈⡆
-⠀⠀⠀⠀⠀⠀⠀⠇⠀⠣⠀⡗⢣⡀⠘⢄⠀⢧⠀⢳⡟⠛⠙⣧⣧⣠⣄⣀⣠⢿⣶⠁⠀⠸⡀⠀⠓⠚⢴⣋⣠⠔⠀⠀⠀⠀⠁
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠧⡤⠙⢤⡈⣦⡼⠀⠀⠧⢶⠚⡇⠈⠁⠈⠃⠀⡰⢿⣄⠀⠀⠑⢤⣀⠀⠀⠀⠈⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⣼⣿⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⣸⣿⣿⣷⣤⣴⣦⣀⣠⣶⡶⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⢠⣄⡀⠀⣼⣿⣿⣿⣿⡿⣿⣿⣿⣿⣿⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠘⣿⣿⣿⣿⣿⣿⣿⡾⢛⠋⡛⠻⣿⣿⣿⣿⣧⣴⣶⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⢸⣿⣿⣿⣿⣽⡏⠰⡈⢆⢡⣷⢀⠻⣿⣿⣿⣿⣇⡀⢀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⢻⣿⣿⣿⣻⣿⠄⢣⠘⡄⢺⡏⢄⢣⡌⠻⣿⣿⣿⣿⣿⣿⣷⣶⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣿⣿⣷⣶⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⣀⣸⣿⣿⣿⣿⣿⡏⢄⠣⢌⣹⠇⡌⣼⢇⠱⡈⠿⣿⣿⣿⡿⠿⠛⠛⠛⠛⠛⠛⠛⠿⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠹⢿⣿⣿⣿⣷⣿⣿⣦⠑⣂⡿⠰⡐⡿⢈⠆⡑⢢⢙⡿⢉⠐⡠⠑⣈⠂⠥⠘⡀⢃⠰⠀⡌⠙⠯⣉⢩⣿⣿⣿⣿⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠈⠹⣿⣿⣿⣽⣿⣷⣜⠏⡰⢱⡟⡠⢊⠔⣡⡿⢁⠂⡡⠄⢡⠠⠌⢠⠁⠒⡈⠄⡡⢀⠃⠤⣹⣿⣿⣿⣿⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠈⣻⣿⣿⣿⣿⣿⣷⣤⠹⢇⠰⡁⢎⣾⠁⠂⡔⠠⠘⡀⢂⠌⠄⠌⠡⡐⢈⡐⠄⢊⣼⣿⣿⣿⣿⣿⡃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠙⠛⠛⢻⣿⣿⣯⣿⣿⣷⣌⠢⠑⢬⡇⠌⠡⠠⠑⢂⢁⢢⡈⠌⡐⠡⠠⢁⡐⠈⢼⣿⣿⣿⣿⡿⢁⢻⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠈⣻⣿⣿⣿⣿⣿⣧⣍⢾⠃⠌⢂⡁⢎⣶⣿⣯⣭⡘⠰⡡⢁⠂⠤⢉⠈⠿⣿⣿⠟⢀⠂⠄⠛⣧⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⡿⡙⢹⣿⣿⣿⣿⣿⣿⠈⠔⠂⢤⣿⣿⣿⣿⣿⣅⠀⠹⠄⡘⢀⢂⠡⠂⢄⠠⢈⠄⠊⠌⡐⢉⣷⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⢰⡇⡇⣾⣿⣿⡿⣿⣿⣿⡈⠄⢃⠘⣿⣿⣿⣿⣿⣿⠀⢠⠃⠄⠃⠄⡂⢉⠄⢂⠡⢈⠌⡐⢈⠄⡘⣷⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⢸⡇⣓⡘⠿⣿⢷⠙⠛⣻⠡⢈⠄⢊⡘⢿⢿⠿⠟⠃⢠⠞⣨⠐⡉⡐⢈⠤⠈⡄⢂⡁⢂⠌⠄⡂⠔⠘⣷⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⣯⠱⢈⠐⠂⢾⣁⣂⣽⣆⠂⣌⣼⠇⠠⢉⠐⡀⠉⠤⢈⠳⠇⡐⠠⢁⠂⡡⠐⡠⠐⠂⠌⡐⠐⡨⠐⠸⣧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⣇⠂⠌⣁⠂⡉⢹⣟⣿⣻⡯⠁⠌⢂⡁⠢⢈⢁⠒⠠⠒⡀⠆⣁⠂⠡⠄⡑⠠⠑⣈⠐⡈⠔⠠⠑⢂⢹⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⣧⠌⣀⠒⡈⡐⠻⣮⡷⠃⠌⢂⠡⠠⠑⣀⠊⠄⡑⠠⢁⠂⠤⢈⠁⠆⡐⠡⠌⣀⠂⠡⠌⢂⠡⢂⠘⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢳⣤⠒⠠⠐⠡⣀⠐⡈⠔⡈⠤⠑⡈⠄⠌⡐⢈⡁⢂⠡⠒⡈⠰⠈⢄⡁⠆⠠⠌⠡⣈⠐⡐⡈⠌⣻⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⢷⡈⠅⠒⡀⢂⠁⠆⠰⠀⡅⠂⠌⠒⡈⠄⠰⠈⢄⠡⠐⠡⠌⢠⠐⡈⢡⠈⠔⡀⠒⢠⠐⡈⣿⡃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⠠⢁⠂⢿⡆⠌⡁⢺⠇⡁⢊⠐⣄⠉⠄⠃⡄⠊⠌⡐⠌⡀⠆⡁⢂⠌⡐⠠⠉⠄⢂⠁⣾⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⠀⠀⠀⠘⣧⠒⡈⠄⢶⢀⠡⡞⡐⠠⢁⣞⠂⢌⠘⢠⠐⣡⡬⠴⢒⠃⡐⡈⠄⢂⠌⠡⠘⡈⠄⢊⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⠹⣧⠀⢀⣤⠾⢷⡐⡈⢼⡆⢸⡇⠡⢘⣼⢳⡿⣦⠈⣤⠿⢁⢂⠁⠆⡈⠔⠠⢁⠊⠄⡡⠡⢐⠈⣼⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡇⢃⢹⡷⠋⢄⠂⠜⠹⢶⠾⢁⠚⢿⡴⠟⢡⣿⠓⠸⣿⠋⡐⠄⢂⠉⡐⡐⠨⠐⠡⡈⢄⡛⢁⠂⣸⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⣸⢰⠀⡂⠿⠈⢄⡈⢂⡁⢂⠐⠂⡌⠠⠐⡈⠴⣿⢀⠡⠘⣆⠰⢈⠂⢡⠐⣀⠃⠡⢒⡼⠋⡐⠈⣴⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⢿⡀⠆⡁⢂⠡⢂⠐⡠⠐⡈⠄⠃⡄⠡⢁⠂⢼⣿⠀⠂⡅⢂⡐⠂⠌⢤⣒⠠⠬⠓⡉⠄⢒⣠⡿⠛⢶⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⠷⠶⠶⢧⠶⡶⢶⠶⡷⢶⠾⡶⢶⠷⡶⠾⠼⢿⣠⣁⣐⣠⣀⣉⣒⣰⣂⣦⣥⣖⣴⠮⠿⠳⠶⠾⠴⠿⠿⠿⠳⠶⣦⣀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣤⣦⣶⣼⡟⠃⠀⠀⠀⠀⠀⠃⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠻⠿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 EOF
 
 echo "Select the tools you want to install:"
@@ -190,22 +198,60 @@ install_navi() {
     sudo pacman -S navi
 }
 
+
+#############################################
+#############################################
+#############################################
+
 echo "Ricing base install"
-sudo pacman -S zsh fasd peco acpi
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-git clone https://github.com/spaceship-prompt/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" --depth=1
-ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
-git clone https://github.com/jimeh/zsh-peco-history.git $ZSH_CUSTOM/plugins/zsh-peco-history
-git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
-git clone https://github.com/MichaelAquilina/zsh-you-should-use.git $ZSH_CUSTOM/plugins/you-should-use
+
+for pkg in zsh fasd peco acpi; do
+    if ! pacman -Qi $pkg &> /dev/null; then
+        sudo pacman -S $pkg
+    else
+        echo "$pkg is already installed."
+    fi
+done
+
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+    curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -o install_oh_my_zsh.sh
+    sed -i 's/exec zsh -l//g' install_oh_my_zsh.sh
+    sh install_oh_my_zsh.sh
+else
+    echo "Oh My Zsh is already installed."
+fi
+
+ZSH_CUSTOM=${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}
+
+themes_and_plugins=(
+    "spaceship-prompt https://github.com/spaceship-prompt/spaceship-prompt.git"
+    "zsh-peco-history https://github.com/jimeh/zsh-peco-history.git"
+    "zsh-autosuggestions https://github.com/zsh-users/zsh-autosuggestions"
+    "zsh-syntax-highlighting https://github.com/zsh-users/zsh-syntax-highlighting"
+    "you-should-use https://github.com/MichaelAquilina/zsh-you-should-use.git"
+)
+
+for item in "${themes_and_plugins[@]}"; do
+    read -ra ADDR <<< "$item"
+    if [ ! -d "$ZSH_CUSTOM/${ADDR[0]}" ]; then
+        git clone "${ADDR[1]}" "$ZSH_CUSTOM/${ADDR[0]}" --depth=1
+    else
+        echo "${ADDR[0]} is already cloned."
+    fi
+done
+
+if [ ! -f "$ZSH_CUSTOM/themes/spaceship.zsh-theme" ]; then
+    ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
+fi
+
 sed -i '/^ZSH_THEME=/c\ZSH_THEME="spaceship"' ~/.zshrc
 sed -i '/^plugins=(/c\plugins=(git fasd zsh-peco-history zsh-autosuggestions zsh-syntax-highlighting you-should-use docker archlinux ansible aws azure battery colored-man-pages colorize command-not-found docker-compose rsync rust terraform zsh-interactive-cd)' ~/.zshrc
+
 echo "alias cdi='cd \$(ls | peco)'" >> ~/.zshrc
 echo "alias -g xcopy='xclip -selection clipboard'" >> ~/.zshrc
 echo "alias -g xpaste='xclip -selection clipboard -o'" >> ~/.zshrc
-mkdir -p ~/.config && touch ~/.config/spaceship.zsh
 
+mkdir -p ~/.config && touch ~/.config/spaceship.zsh
 cat << "EOF" > ~/.config/spaceship.zsh
 SPACESHIP_PROMPT_ORDER=(
   time          # Time stamps section
@@ -264,7 +310,8 @@ do
         24) install_tempmail ;;
         25) install_bat ;;
         26) install_navi ;;
-        27) install_yay
+        27) 
+            install_yay
             install_hunt
             install_dooit
             install_plow
@@ -294,3 +341,5 @@ do
 done
 
 echo "Installation complete."
+chsh -s $(which zsh)
+exec zsh -l
