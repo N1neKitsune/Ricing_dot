@@ -32,9 +32,8 @@ cat << "EOF"
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠻⠿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 EOF
 if ! pacman -Qi gum &> /dev/null; then
-    pacman -S --noconfirm gum > /dev/null
+    pacman -S --needed --noconfirm gum > /dev/null
 fi
-
 
 echo "Auto or Personnalized"
 auto=$(gum choose --height 2 --limit 1 Auto Personnalized)
@@ -46,20 +45,24 @@ fi
 # Function to install YAY
 install_yay() {
     if ! command -v yay &> /dev/null; then
-        sudo pacman -Sy --needed git base-devel
+        sudo gum spin --spinner moon --title.foreground="#239B56" --title "Installing : git base-devel" -- bash -c "pacman -S --needed --noconfirm git base-devel"
         git clone https://aur.archlinux.org/yay.git
         cd yay && makepkg -si && cd .. && rm -rf yay
     else
-        echo "YAY is already installed."
+        echo "YAY is already installed." | gum style --foreground="#F5B041" --border-foreground="#F5B041" --border rounded --align center
     fi
 }
 
 # Function to install HUNT
 install_hunt() {
     if ! command -v cargo &> /dev/null; then
-        sudo pacman -Sy --needed rust
+        sudo gum spin --spinner moon --title.foreground="#239B56" --title "Installing : rust" -- bash -c "pacman -S --needed --noconfirm rust"
     fi
-    cargo install hunt
+    if ! command -V hunt &> /dev/null; then
+        cargo install hunt
+    else 
+        echo "Hunt is already installed." | gum style --foreground="#F5B041" --border-foreground="#F5B041" --border rounded --align center
+    fi
 }
 
 # Function to install DOOIT
@@ -68,7 +71,7 @@ install_dooit() {
     if ! pacman -Qi dooit-git &> /dev/null; then
         yay -S --noconfirm dooit-git
     else
-        echo "dooit-git is already installed."
+        echo "dooit-git is already installed." | gum style --foreground="#F5B041" --border-foreground="#F5B041" --border rounded --align center
     fi
 }
 
@@ -78,21 +81,29 @@ install_plow() {
     if ! pacman -Qi plow &> /dev/null; then
         yay -S --noconfirm plow
     else
-        echo "plow is already installed."
+        echo "plow is already installed." | gum style --foreground="#F5B041" --border-foreground="#F5B041" --border rounded --align center
     fi
 }
 
 # Function to install CATP
 install_catp() {
-    wget https://github.com/rapiz1/catp/releases/download/v0.2.0/catp-x86_64-unknown-linux-gnu.zip -O /tmp/catp.zip
-    sudo unzip -o /tmp/catp.zip -d /usr/local/bin/ && sudo chmod +x /usr/local/bin/catp && rm /tmp/catp.zip
+    if ! command -v catp &> /dev/null; then
+        wget https://github.com/rapiz1/catp/releases/download/v0.2.0/catp-x86_64-unknown-linux-gnu.zip -O /tmp/catp.zip
+        sudo unzip -o /tmp/catp.zip -d /usr/local/bin/ && sudo chmod +x /usr/local/bin/catp && rm /tmp/catp.zip
+    else
+        echo "catp is already installed." | gum style --foreground="#F5B041" --border-foreground="#F5B041" --border rounded --align center
+    fi
 }
 
 # Function to install CURL-IMPERSONATE
 install_curl_impersonate() {
-    sudo pacman -Sy --needed nss ca-certificates wget
-    sudo wget https://github.com/lwthiker/curl-impersonate/releases/download/v0.6.0-alpha.1/curl-impersonate-v0.6.0-alpha.1.aarch64-linux-gnu.tar.gz -O /usr/local/bin/curl-imp.tar.gz
-    sudo tar -xvf /usr/local/bin/curl-imp.tar.gz -C /usr/local/bin && sudo chmod +x /usr/local/bin/curl* && sudo rm /usr/local/bin/curl-imp.tar.gz
+    if ! command -v curl_chrome100 &> /dev/null; then
+        sudo pacman -S --needed --noconfirm  nss ca-certificates wget
+        sudo wget https://github.com/lwthiker/curl-impersonate/releases/download/v0.6.0-alpha.1/curl-impersonate-v0.6.0-alpha.1.aarch64-linux-gnu.tar.gz -O /usr/local/bin/curl-imp.tar.gz
+        sudo tar -xvf /usr/local/bin/curl-imp.tar.gz -C /usr/local/bin && sudo chmod +x /usr/local/bin/curl* && sudo rm /usr/local/bin/curl-imp.tar.gz
+    else 
+        echo "Curl_impersonate is already installed." | gum style --foreground="#F5B041" --border-foreground="#F5B041" --border rounded --align center
+    fi
 }
 
 # Function to install NTFY
@@ -101,7 +112,7 @@ install_ntfy() {
     if ! pacman -Qi ntfysh-bin &> /dev/null; then
         yay -S --noconfirm ntfysh-bin
     else
-        echo "ntfysh-bin is already installed."
+        echo "ntfysh-bin is already installed." | gum style --foreground="#F5B041" --border-foreground="#F5B041" --border rounded --align center
     fi
 }
 
@@ -111,31 +122,31 @@ install_jqp() {
     if ! pacman -Qi jqp-bin &> /dev/null; then
         yay -S --noconfirm jqp-bin
     else
-        echo "jqp-bin is already installed."
+        echo "jqp-bin is already installed." | gum style --foreground="#F5B041" --border-foreground="#F5B041" --border rounded --align center
     fi    
 }
 
 # Function to install K9S
 install_k9s() {
-    sudo pacman -S k9s
+    sudo gum spin --spinner moon --title.foreground="#239B56" --title "Installing : k9s" -- bash -c "pacman -S --needed --noconfirm k9s"
 }
 
 # Function to install NEOFETCH
 install_neofetch() {
-    sudo pacman -S neofetch
+    sudo gum spin --spinner moon --title.foreground="#239B56" --title "Installing : neofetch" -- bash -c "pacman -S --needed --noconfirm neofetch"
 }
 
 # Function to install OTS
 install_ots() {
     if ! command -v go &> /dev/null; then
-        sudo pacman -Sy --needed go
+        sudo gum spin --spinner moon --title.foreground="#239B56" --title "Installing : go" -- bash -c "pacman -S --needed --noconfirm go"
     fi
     sudo go install github.com/sniptt-official/ots@latest
 }
 
 # Function to install BOTTOM
 install_bottom() {
-    sudo pacman -S bottom
+    sudo gum spin --spinner moon --title.foreground="#239B56" --title "Installing : bottom" -- bash -c "pacman -S --needed --noconfirm bottom"
 }
 
 # Function to install VIDDY
@@ -144,14 +155,14 @@ install_viddy() {
     if ! pacman -Qi viddy &> /dev/null; then
         yay -S --noconfirm viddy
     else
-        echo "viddy is already installed."
+        echo "viddy is already installed." | gum style --foreground="#F5B041" --border-foreground="#F5B041" --border rounded --align center
     fi  
 }
 
 # Function to install HTMLQ
 install_htmlq() {
     if ! command -v cargo &> /dev/null; then
-        sudo pacman -Sy --needed rust
+        sudo gum spin --spinner moon --title.foreground="#239B56" --title "Installing : rust" -- bash -c "pacman -S --needed --noconfirm rust"
     fi
     cargo install htmlq
 }
@@ -162,13 +173,13 @@ install_sysz() {
     if ! pacman -Qi sysz &> /dev/null; then
         yay -S --noconfirm sysz
     else
-        echo "sysz is already installed."
+        echo "sysz is already installed." | gum style --foreground="#F5B041" --border-foreground="#F5B041" --border rounded --align center
     fi
 }
 
 # Function to install PUEUE
 install_pueue() {
-    sudo pacman -S pueue
+    sudo gum spin --spinner moon --title.foreground="#239B56" --title "Installing : pueue" -- bash -c "pacman -S --needed --noconfirm pueue"
 }
 
 # Function to install VIZEX
@@ -177,13 +188,13 @@ install_vizex() {
     if ! pacman -Qi vizex &> /dev/null; then
         yay -S --noconfirm vizex
     else
-        echo "vizex is already installed."
+        echo "vizex is already installed." | gum style --foreground="#F5B041" --border-foreground="#F5B041" --border rounded --align center
     fi
 }
 
 # Function to install GPING
 install_gping() {
-    sudo pacman -S gping
+    sudo gum spin --spinner moon --title.foreground="#239B56" --title "Installing : gping" -- bash -c "pacman -S --needed --noconfirm gping"
 }
 
 # Function to install TEMPMAIL
@@ -192,18 +203,18 @@ install_tempmail() {
     if ! pacman -Qi tmpmail-git &> /dev/null; then
         yay -S --noconfirm tmpmail-git
     else
-        echo "tmpmail-git is already installed."
+        echo "tmpmail-git is already installed." | gum style --foreground="#F5B041" --border-foreground="#F5B041" --border rounded --align center
     fi
 }
 
 # Function to install BAT
 install_bat() {
-    sudo pacman -S bat
+    sudo gum spin --spinner moon --title.foreground="#239B56" --title "Installing : bat" -- bash -c "pacman -S --needed --noconfirm bat"
 }
 
 # Function to install NAVI
 install_navi() {
-    sudo pacman -S navi
+    sudo gum spin --spinner moon --title.foreground="#239B56" --title "Installing : navi" -- bash -c "pacman -S --needed --noconfirm navi"
 }
 
 ################################################
@@ -211,7 +222,7 @@ install_navi() {
 gum style --foreground="#239B56" --border-foreground="#239B56" --border double --align center --padding "1 1" "Base Package"
 for pkg in zsh fasd peco acpi gum; do
     if ! pacman -Qi $pkg &> /dev/null; then
-        sudo pacman -S $pkg
+        (sudo gum spin --spinner moon --title.foreground="#239B56" --title "Installing : $pkg" -- bash -c "pacman -S --needed --noconfirm $pkg")
     else
         echo "$pkg is already installed." | gum style --foreground="#F5B041" --border-foreground="#F5B041" --border rounded --align center
     fi
@@ -305,7 +316,7 @@ if [ "$auto" = "Auto" ]; then
     pacman_packages=(bottom nnn ncdu ssh-tools pueue gping bat navi rust k9s neofetch go)
     for pkg in "${pacman_packages[@]}"; do
         if ! pacman -Qi $pkg &> /dev/null; then
-            (gum spin --spinner moon --title.foreground="#F00" --title "Installing : $pkg" sudo pacman -S $pkg --noconfirm)
+            (sudo gum spin --spinner moon --title.foreground="#239B56" --title "Installing : $pkg" -- bash -c "pacman -S --needed --noconfirm $pkg")
         else
             echo "$pkg est déjà installé." | gum style --foreground="#F5B041" --border-foreground="#F5B041" --border rounded --align center
         fi
@@ -345,9 +356,9 @@ else
             "NTFY (Send push notifications to your phone or desktop)") install_ntfy ;;
             "JQP (A TUI playground for exploring jq)") install_jqp ;;
             "K9S (Kubernetes CLI)") install_k9s ;;
-            "NNN (A full-featured terminal file manager)") sudo pacman -S nnn ;;
-            "NCDU (A disk utility for Unix systems)") sudo pacman -S ncdu ;;
-            "SSH-TOOLS (Making SSH more convenient)") sudo pacman -S ssh-tools ;;
+            "NNN (A full-featured terminal file manager)") sudo pacman -S --needed --noconfirm nnn ;;
+            "NCDU (A disk utility for Unix systems)") sudo pacman -S --needed --noconfirm ncdu ;;
+            "SSH-TOOLS (Making SSH more convenient)") sudo pacman -S --needed --noconfirm ssh-tools ;;
             "NALA (A front-end for libapt-pkg)") echo "Nala is only for APT (Debian/Ubuntu systems)." ;;
             "NEOFETCH (A command-line system information tool)") install_neofetch ;;
             "OTS (Share end-to-end encrypted secrets)") install_ots ;;
@@ -355,11 +366,11 @@ else
             "VIDDY (A modern watch command)") install_viddy ;;
             "HTMLQ (Like jq, but for HTML)") install_htmlq ;;
             "SYSZ (A terminal UI for systemctl)") install_sysz ;;
-            "PUEUE (A command-line task management tool)") sudo pacman -S pueue ;;
+            "PUEUE (A command-line task management tool)") sudo pacman -S --needed --noconfirm pueue ;;
             "VIZEX (Visualize disk space usage)") install_vizex ;;
-            "GPING (Ping, but with a graph)") sudo pacman -S gping ;;
+            "GPING (Ping, but with a graph)") sudo pacman -S --needed --noconfirm gping ;;
             "TEMPMAIL (A temporary email right from your terminal)") install_tempmail ;;
-            "BAT (A cat clone with syntax highlighting)") sudo pacman -S bat ;;
+            "BAT (A cat clone with syntax highlighting)") sudo pacman -S --needed --noconfirm bat ;;
             "NAVI (An interactive cheatsheet tool)") install_navi ;;
             *) echo "Invalid choice: $choice" ;;
         esac
