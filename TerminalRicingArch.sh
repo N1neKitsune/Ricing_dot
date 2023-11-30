@@ -226,6 +226,20 @@ install_navi() {
     sudo gum spin --spinner moon --title.foreground="#239B56" --title "Installing : navi" -- bash -c "pacman -S --needed --noconfirm navi"
 }
 
+# Function to install SSH-TOOLS
+install_ssh_tools(){
+    sudo gum spin --spinner moon --title.foreground="#239B56" --title "Installing : ssh-tools" -- bash -c "pacman -S --needed --noconfirm ssh-tools"
+}
+
+# Function to install NCDU
+install_ncdu(){
+    sudo gum spin --spinner moon --title.foreground="#239B56" --title "Installing : ncdu" -- bash -c "pacman -S --needed --noconfirm ncdu"
+}
+
+# Function to install NNN
+install_nnn(){
+    sudo gum spin --spinner moon --title.foreground="#239B56" --title "Installing : nnn" -- bash -c "pacman -S --needed --noconfirm nnn"
+}
 ################################################
 
 gum style --foreground="#239B56" --border-foreground="#239B56" --border double --align center --padding "1 1" "Base Package"
@@ -365,9 +379,9 @@ else
             "NTFY (Send push notifications to your phone or desktop)") install_ntfy ;;
             "JQP (A TUI playground for exploring jq)") install_jqp ;;
             "K9S (Kubernetes CLI)") install_k9s ;;
-            "NNN (A full-featured terminal file manager)") sudo pacman -S --needed --noconfirm nnn ;;
-            "NCDU (A disk utility for Unix systems)") sudo pacman -S --needed --noconfirm ncdu ;;
-            "SSH-TOOLS (Making SSH more convenient)") sudo pacman -S --needed --noconfirm ssh-tools ;;
+            "NNN (A full-featured terminal file manager)") install_nnn ;;
+            "NCDU (A disk utility for Unix systems)") install_ncdu ;;
+            "SSH-TOOLS (Making SSH more convenient)") install_ssh_tools ;;
             "NALA (A front-end for libapt-pkg)") echo "Nala is only for APT (Debian/Ubuntu systems)." ;;
             "NEOFETCH (A command-line system information tool)") install_neofetch ;;
             "OTS (Share end-to-end encrypted secrets)") install_ots ;;
@@ -375,11 +389,11 @@ else
             "VIDDY (A modern watch command)") install_viddy ;;
             "HTMLQ (Like jq, but for HTML)") install_htmlq ;;
             "SYSZ (A terminal UI for systemctl)") install_sysz ;;
-            "PUEUE (A command-line task management tool)") sudo pacman -S --needed --noconfirm pueue ;;
+            "PUEUE (A command-line task management tool)") install_pueue ;;
             "VIZEX (Visualize disk space usage)") install_vizex ;;
-            "GPING (Ping, but with a graph)") sudo pacman -S --needed --noconfirm gping ;;
+            "GPING (Ping, but with a graph)") install_gping ;;
             "TEMPMAIL (A temporary email right from your terminal)") install_tempmail ;;
-            "BAT (A cat clone with syntax highlighting)") sudo pacman -S --needed --noconfirm bat ;;
+            "BAT (A cat clone with syntax highlighting)") install_bat ;;
             "NAVI (An interactive cheatsheet tool)") install_navi ;;
             *) echo "Invalid choice: $choice" | gum style --foreground="#C0392B" --border-foreground="#C0392B" --border rounded --align center ;;
         esac
