@@ -371,5 +371,5 @@ gum style --foreground="#239B56" --border-foreground="#239B56" --border double -
 if [ "$(getent passwd $USER | cut -d: -f7)" != "/bin/zsh" ]; then
     chsh -s /bin/zsh
 fi
-    exec zsh -l
+exec zsh -l
 
