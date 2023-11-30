@@ -348,7 +348,7 @@ if [ "$auto" = "Auto" ]; then
     )
     for key in "${!custom_installs[@]}"; do
         if declare -f "${custom_installs[$key]}" > /dev/null; then
-            "${custom_installs[$key]}" > /dev/null
+            "${custom_installs[$key]}"
         else
             echo "La fonction ${custom_installs[$key]} n'existe pas pour l'installation de $key." | gum style --foreground="#C0392B" --border-foreground="#C0392B" --border rounded --align center
         fi
