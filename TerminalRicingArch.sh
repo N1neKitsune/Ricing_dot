@@ -150,9 +150,6 @@ install_ots() {
     if ! command -v go &> /dev/null; then
         sudo pacman -Sy --needed go
     fi
-    export GOBIN="/usr/local/bin"
-    export GOPATH="/usr/local/bin"
-    export PATH="$PATH:$(go env GOBIN):$(go env GOPATH)/bin"
     sudo go install github.com/sniptt-official/ots@latest
 }
 
@@ -284,6 +281,9 @@ sed -i '/^plugins=(/c\plugins=(git fasd zsh-peco-history zsh-autosuggestions zsh
 if ! grep -q 'export PATH="$HOME/.cargo/bin:$PATH"' ~/.zshrc; then
     echo 'export PATH="$HOME/.cargo/bin:$PATH"' >> ~/.zshrc
 fi
+if ! grep -q 'export PATH="$PATH:$(go env GOBIN):$(go env GOPATH)/bin"' ~/.zshrc; then
+    echo 'export PATH="$PATH:$(go env GOBIN):$(go env GOPATH)/bin"' >> ~/.zshrc
+fi
 if ! grep -q "alias cdi='cd \$(ls | peco)'" ~/.zshrc; then
     echo "alias cdi='cd \$(ls | peco)'" >> ~/.zshrc
 fi
@@ -359,9 +359,6 @@ do
         25) install_bat ;;
         26) install_navi ;;
         27) 
-            export GOBIN="/usr/local/bin"
-            export GOPATH="/usr/local/bin"
-            export PATH="$PATH:$(go env GOBIN):$(go env GOPATH)/bin"
             pacman_packages=(bottom nnn ncdu ssh-tools pueue gping bat navi rust k9s neofetch go)
             for pkg in "${pacman_packages[@]}"; do
                 if ! pacman -Qi $pkg &> /dev/null; then
