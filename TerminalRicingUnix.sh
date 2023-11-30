@@ -212,7 +212,7 @@ install_nala(){
 ################################################
 
 gum style --foreground="#239B56" --border-foreground="#239B56" --border double --align center --padding "1 1" "Base Package"
-for pkg in zsh fasd peco acpi; do
+for pkg in zsh fasd peco acpi go; do
     if ! command -v $pkg &> /dev/null; then
         (sudo gum spin --spinner moon --title.foreground="#239B56" --title "Installing : $pkg" -- bash -c "apt install -y $pkg")
     else
