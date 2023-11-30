@@ -83,10 +83,10 @@ install_hunt() {
 }
 
 # Function to install DOOIT
-install_dooit_git() {
+install_dooit() {
     install_yay
     if ! pacman -Qi dooit-git &> /dev/null; then
-        yay -S dooit-git
+        yay -S --noconfirm dooit-git
     else
         echo "dooit-git is already installed."
     fi
@@ -96,7 +96,7 @@ install_dooit_git() {
 install_plow() {
     install_yay
     if ! pacman -Qi plow &> /dev/null; then
-        yay -S plow
+        yay -S --noconfirm plow
     else
         echo "plow is already installed."
     fi
@@ -111,7 +111,7 @@ install_catp() {
 # Function to install CURL-IMPERSONATE
 install_curl_impersonate() {
     sudo pacman -Sy --needed nss ca-certificates wget
-    wget https://github.com/lwthiker/curl-impersonate/releases/download/v0.6.0-alpha.1/curl-impersonate-v0.6.0-alpha.1.aarch64-linux-gnu.tar.gz -O /usr/local/bin/curl-imp.tar.gz
+    sudo wget https://github.com/lwthiker/curl-impersonate/releases/download/v0.6.0-alpha.1/curl-impersonate-v0.6.0-alpha.1.aarch64-linux-gnu.tar.gz -O /usr/local/bin/curl-imp.tar.gz
     sudo tar -xvf /usr/local/bin/curl-imp.tar.gz -C /usr/local/bin && sudo chmod +x /usr/local/bin/curl* && sudo rm /usr/local/bin/curl-imp.tar.gz
 }
 
@@ -119,7 +119,7 @@ install_curl_impersonate() {
 install_ntfy() {
     install_yay
     if ! pacman -Qi ntfysh-bin &> /dev/null; then
-        yay -S ntfysh-bin
+        yay -S --noconfirm ntfysh-bin
     else
         echo "ntfysh-bin is already installed."
     fi
@@ -129,7 +129,7 @@ install_ntfy() {
 install_jqp() {
     install_yay
     if ! pacman -Qi jqp-bin &> /dev/null; then
-        yay -S jqp-bin
+        yay -S --noconfirm jqp-bin
     else
         echo "jqp-bin is already installed."
     fi    
@@ -162,7 +162,7 @@ install_bottom() {
 install_viddy() {
     install_yay
     if ! pacman -Qi viddy &> /dev/null; then
-        yay -S viddy
+        yay -S --noconfirm viddy
     else
         echo "viddy is already installed."
     fi  
@@ -180,7 +180,7 @@ install_htmlq() {
 install_sysz() {
     install_yay
     if ! pacman -Qi sysz &> /dev/null; then
-        yay -S sysz
+        yay -S --noconfirm sysz
     else
         echo "sysz is already installed."
     fi
@@ -195,7 +195,7 @@ install_pueue() {
 install_vizex() {
     install_yay
     if ! pacman -Qi vizex &> /dev/null; then
-        yay -S vizex
+        yay -S --noconfirm vizex
     else
         echo "vizex is already installed."
     fi
@@ -210,7 +210,7 @@ install_gping() {
 install_tempmail() {
     install_yay
     if ! pacman -Qi tmpmail-git &> /dev/null; then
-        yay -S tmpmail-git
+        yay -S --noconfirm tmpmail-git
     else
         echo "tmpmail-git is already installed."
     fi
@@ -229,8 +229,12 @@ install_navi() {
 #############################################
 #############################################
 #############################################
-
-echo "Ricing base install"
+echo "Début de l'installation..."
+cat << "EOF"
+####################
+####Base Package####
+####################
+EOF
 
 for pkg in zsh fasd peco acpi; do
     if ! pacman -Qi $pkg &> /dev/null; then
@@ -259,7 +263,7 @@ themes_and_plugins=(
 )
 
 for item in "${themes_and_plugins[@]}"; do
-    read -ra ADDR <<< "$item"
+    read -ra ADDR <<< "$item"A
     if [ ! -d "$ZSH_CUSTOM/${ADDR[0]}" ]; then
         git clone "${ADDR[1]}" "$ZSH_CUSTOM/${ADDR[0]}" --depth=1
     else
@@ -274,9 +278,19 @@ fi
 sed -i '/^ZSH_THEME=/c\ZSH_THEME="spaceship"' ~/.zshrc
 sed -i '/^plugins=(/c\plugins=(git fasd zsh-peco-history zsh-autosuggestions zsh-syntax-highlighting you-should-use docker archlinux ansible aws azure battery colored-man-pages colorize command-not-found docker-compose rsync rust terraform zsh-interactive-cd)' ~/.zshrc
 
-echo "alias cdi='cd \$(ls | peco)'" >> ~/.zshrc
-echo "alias -g xcopy='xclip -selection clipboard'" >> ~/.zshrc
-echo "alias -g xpaste='xclip -selection clipboard -o'" >> ~/.zshrc
+if ! grep -q 'export PATH="$HOME/.cargo/bin:$PATH"' ~/.zshrc; then
+    echo 'export PATH="$HOME/.cargo/bin:$PATH"' >> ~/.zshrc
+fi
+if ! grep -q "alias cdi='cd \$(ls | peco)'" ~/.zshrc; then
+    echo "alias cdi='cd \$(ls | peco)'" >> ~/.zshrc
+fi
+if ! grep -q "alias -g xcopy='xclip -selection clipboard'" ~/.zshrc; then
+    echo "alias -g xcopy='xclip -selection clipboard'" >> ~/.zshrc
+fi
+if ! grep -q "alias -g xpaste='xclip -selection clipboard -o'" ~/.zshrc; then
+    echo "alias -g xpaste='xclip -selection clipboard -o'" >> ~/.zshrc
+fi
+
 
 mkdir -p ~/.config && touch ~/.config/spaceship.zsh
 cat << "EOF" > ~/.config/spaceship.zsh
@@ -308,7 +322,11 @@ SPACESHIP_TIME_FORMAT='%D{%H:%M}'
 SPACESHIP_TIME_COLOR=red
 EOF
 
-#User Choices process
+cat << "EOF"
+####################
+###Extended Tools###
+####################
+EOF
 for choice in $choices
 do
     case $choice in
@@ -338,7 +356,7 @@ do
         25) install_bat ;;
         26) install_navi ;;
         27) 
-            sudo pacman -S bottom nnn ncdu ssh-tools pueue gping bat navi rust k9s neofetch
+            sudo pacman -S bottom nnn ncdu ssh-tools pueue gping bat navi rust k9s neofetch go
             install_yay
             install_hunt
             install_dooit
@@ -359,5 +377,5 @@ do
 done
 
 echo "Installation complete."
-chsh -s $(which zsh)
+chsh -s /bin/zsh
 exec zsh -l
