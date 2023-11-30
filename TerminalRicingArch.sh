@@ -31,37 +31,14 @@ cat << "EOF"
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣤⣦⣶⣼⡟⠃⠀⠀⠀⠀⠀⠃⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠻⠿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 EOF
+sudo pacman -S gum --noconfirm > /dev/null
 
-echo "Select the tools you want to install:"
-echo "1. YAY (Yet Another Yogurt - An AUR Helper)"
-echo "2. HUNT (A simplified Find command made with Rust)"
-echo "3. DOOIT (A todo manager)"
-echo "4. PLOW (An HTTP(S) benchmarking tool)"
-echo "5. CATP (Print the output of a running process)"
-echo "6. CURL-IMPERSONATE (A special build of curl)"
-echo "7. NTFY (Send push notifications to your phone or desktop)"
-echo "8. JQP (A TUI playground for exploring jq)"
-echo "9. K9S (Kubernetes CLI)"
-echo "10. NNN (A full-featured terminal file manager)"
-echo "11. NCDU (A disk utility for Unix systems)"
-echo "12. SSH-TOOLS (Making SSH more convenient)"
-echo "13. NALA (A front-end for libapt-pkg)"
-echo "14. NEOFETCH (A command-line system information tool)"
-echo "15. OTS (Share end-to-end encrypted secrets)"
-echo "16. BOTTOM (A graphical process/system monitor)"
-echo "17. VIDDY (A modern watch command)"
-echo "18. HTMLQ (Like jq, but for HTML)"
-echo "19. SYSZ (A terminal UI for systemctl)"
-echo "20. MILLER (Like awk, sed, cut, join, and sort for data formats)"
-echo "21. PUEUE (A command-line task management tool)"
-echo "22. VIZEX (Visualize disk space usage)"
-echo "23. GPING (Ping, but with a graph)"
-echo "24. TEMPMAIL (A temporary email right from your terminal)"
-echo "25. BAT (A cat clone with syntax highlighting)"
-echo "26. NAVI (An interactive cheatsheet tool)"
-echo "27. Install all"
+echo "Auto or Personnalized"
+auto=$(gum choose --height 2 --limit 1 Auto Personnalized)
 
-read -p "Enter your choice (e.g., 1 2 3): " choices
+if [ "$auto" = "Personnalized" ]; then
+choices=$(gum choose --height 26 --limit 26 "YAY (Yet Another Yogurt - An AUR Helper)" "HUNT (A simplified Find command made with Rust)" "DOOIT (A todo manager)" "PLOW (An HTTP(S) benchmarking tool)" "CATP (Print the output of a running process)" "CURL-IMPERSONATE (A special build of curl)" "NTFY (Send push notifications to your phone or desktop)" "JQP (A TUI playground for exploring jq)" "K9S (Kubernetes CLI)" "NNN (A full-featured terminal file manager)" "NCDU (A disk utility for Unix systems)" "SSH-TOOLS (Making SSH more convenient)" "NALA (A front-end for libapt-pkg)" "NEOFETCH (A command-line system information tool)" "OTS (Share end-to-end encrypted secrets)" "BOTTOM (A graphical process/system monitor)" "VIDDY (A modern watch command)" "HTMLQ (Like jq, but for HTML)" "SYSZ (A terminal UI for systemctl)" "MILLER (Like awk, sed, cut, join, and sort for data formats)" "PUEUE (A command-line task management tool)" "VIZEX (Visualize disk space usage)" "GPING (Ping, but with a graph)" "TEMPMAIL (A temporary email right from your terminal)" "BAT (A cat clone with syntax highlighting)" "NAVI (An interactive cheatsheet tool)")
+fi
 
 # Function to install YAY
 install_yay() {
@@ -236,7 +213,7 @@ cat << "EOF"
 ####################
 EOF
 
-for pkg in zsh fasd peco acpi; do
+for pkg in zsh fasd peco acpi gum; do
     if ! pacman -Qi $pkg &> /dev/null; then
         sudo pacman -S $pkg
     else
@@ -330,74 +307,71 @@ cat << "EOF"
 ###Extended Tools###
 ####################
 EOF
-for choice in $choices
-do
-    case $choice in
-        1) install_yay ;;
-        2) install_hunt ;;
-        3) install_dooit ;;
-        4) install_plow ;;
-        5) install_catp ;;
-        6) install_curl_impersonate ;;
-        7) install_ntfy ;;
-        8) install_jqp ;;
-        9) install_k9s ;;
-        10) sudo pacman -S nnn ;;
-        11) sudo pacman -S ncdu ;;
-        12) sudo pacman -S ssh-tools ;;
-        13) echo "Nala is only for APT (Debian/Ubuntu systems)." ;;
-        14) install_neofetch ;;
-        15) install_ots ;;
-        16) install_bottom ;;
-        17) install_viddy ;;
-        18) install_htmlq ;;
-        19) install_sysz ;;
-        21) install_pueue ;;
-        22) install_vizex ;;
-        23) install_gping ;;
-        24) install_tempmail ;;
-        25) install_bat ;;
-        26) install_navi ;;
-        27) 
-            pacman_packages=(bottom nnn ncdu ssh-tools pueue gping bat navi rust k9s neofetch go)
-            for pkg in "${pacman_packages[@]}"; do
-                if ! pacman -Qi $pkg &> /dev/null; then
-                    echo "Installation de $pkg..."
-                    sudo pacman -S $pkg --noconfirm > /dev/null
-                else
-                    echo "$pkg est déjà installé."
-                fi
-            done
-
-            declare -A custom_installs=(
-                ["yay"]="install_yay"
-                ["hunt"]="install_hunt"
-                ["dooit"]="install_dooit"
-                ["plow"]="install_plow"
-                ["catp"]="install_catp"
-                ["curl_impersonate"]="install_curl_impersonate"
-                ["ntfy"]="install_ntfy"
-                ["jqp"]="install_jqp"
-                ["ots"]="install_ots"
-                ["viddy"]="install_viddy"
-                ["htmlq"]="install_htmlq"
-                ["sysz"]="install_sysz"
-                ["vizex"]="install_vizex"
-                ["tempmail"]="install_tempmail"
-            )
-
-            for key in "${!custom_installs[@]}"; do
-                if declare -f "${custom_installs[$key]}" > /dev/null; then
-                    echo "Installation de $key..."
-                    "${custom_installs[$key]}" > /dev/null
-                else
-                    echo "La fonction ${custom_installs[$key]} n'existe pas pour l'installation de $key."
-                fi
-            done
-            ;;
-        *) echo "Invalid choice: $choice" ;;
-    esac
-done
+if [ "$auto" = "Auto" ]; then
+    pacman_packages=(bottom nnn ncdu ssh-tools pueue gping bat navi rust k9s neofetch go)
+    for pkg in "${pacman_packages[@]}"; do
+        if ! pacman -Qi $pkg &> /dev/null; then
+            echo "Installation de $pkg..."
+            sudo pacman -S $pkg --noconfirm > /dev/null
+        else
+            echo "$pkg est déjà installé."
+        fi
+    done
+    declare -A custom_installs=(
+        ["yay"]="install_yay"
+        ["hunt"]="install_hunt"
+        ["dooit"]="install_dooit"
+        ["plow"]="install_plow"
+        ["catp"]="install_catp"
+        ["curl_impersonate"]="install_curl_impersonate"
+        ["ntfy"]="install_ntfy"
+        ["jqp"]="install_jqp"
+        ["ots"]="install_ots"
+        ["viddy"]="install_viddy"
+        ["htmlq"]="install_htmlq"
+        ["sysz"]="install_sysz"
+        ["vizex"]="install_vizex"
+        ["tempmail"]="install_tempmail"
+    )
+    for key in "${!custom_installs[@]}"; do
+        if declare -f "${custom_installs[$key]}" > /dev/null; then
+            (gum spin --spinner moon --title.foreground="#F00" --title "Installing : $key" "${custom_installs[$key]}")
+        else
+            echo "La fonction ${custom_installs[$key]} n'existe pas pour l'installation de $key."
+        fi
+    done
+else
+    for choice in $choices; do
+        case "$choice" in
+            "YAY (Yet Another Yogurt - An AUR Helper)") install_yay ;;
+            "HUNT (A simplified Find command made with Rust)") install_hunt ;;
+            "DOOIT (A todo manager)") install_dooit ;;
+            "PLOW (An HTTP(S) benchmarking tool)") install_plow ;;
+            "CATP (Print the output of a running process)") install_catp ;;
+            "CURL-IMPERSONATE (A special build of curl)") install_curl_impersonate ;;
+            "NTFY (Send push notifications to your phone or desktop)") install_ntfy ;;
+            "JQP (A TUI playground for exploring jq)") install_jqp ;;
+            "K9S (Kubernetes CLI)") install_k9s ;;
+            "NNN (A full-featured terminal file manager)") sudo pacman -S nnn ;;
+            "NCDU (A disk utility for Unix systems)") sudo pacman -S ncdu ;;
+            "SSH-TOOLS (Making SSH more convenient)") sudo pacman -S ssh-tools ;;
+            "NALA (A front-end for libapt-pkg)") echo "Nala is only for APT (Debian/Ubuntu systems)." ;;
+            "NEOFETCH (A command-line system information tool)") install_neofetch ;;
+            "OTS (Share end-to-end encrypted secrets)") install_ots ;;
+            "BOTTOM (A graphical process/system monitor)") install_bottom ;;
+            "VIDDY (A modern watch command)") install_viddy ;;
+            "HTMLQ (Like jq, but for HTML)") install_htmlq ;;
+            "SYSZ (A terminal UI for systemctl)") install_sysz ;;
+            "PUEUE (A command-line task management tool)") sudo pacman -S pueue ;;
+            "VIZEX (Visualize disk space usage)") install_vizex ;;
+            "GPING (Ping, but with a graph)") sudo pacman -S gping ;;
+            "TEMPMAIL (A temporary email right from your terminal)") install_tempmail ;;
+            "BAT (A cat clone with syntax highlighting)") sudo pacman -S bat ;;
+            "NAVI (An interactive cheatsheet tool)") install_navi ;;
+            *) echo "Invalid choice: $choice" ;;
+        esac
+    done
+fi
 
 echo "Installation complete."
 chsh -s /bin/zsh
