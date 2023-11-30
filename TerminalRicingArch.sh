@@ -305,7 +305,9 @@ fi
 if ! grep -q "alias -g xpaste='xclip -selection clipboard -o'" ~/.zshrc; then
     echo "alias -g xpaste='xclip -selection clipboard -o'" >> ~/.zshrc
 fi
-
+if ! grep -q "neofetch" ~/.zshrc; then
+    echo "neofetch" >> ~/.zshrc
+fi
 
 mkdir -p ~/.config && touch ~/.config/spaceship.zsh
 cat << "EOF" > ~/.config/spaceship.zsh
