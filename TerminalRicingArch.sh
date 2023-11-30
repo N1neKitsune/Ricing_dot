@@ -206,13 +206,7 @@ install_navi() {
 #############################################
 #############################################
 #############################################
-echo "Début de l'installation..."
-cat << "EOF"
-####################
-####Base Package####
-####################
-EOF
-
+gum style --foreground="#FFF" --border-foreground="#FFF" --border double --align center --padding "1 1" "Base Package"
 for pkg in zsh fasd peco acpi gum; do
     if ! pacman -Qi $pkg &> /dev/null; then
         sudo pacman -S $pkg
@@ -302,19 +296,14 @@ SPACESHIP_TIME_FORMAT='%D{%H:%M}'
 SPACESHIP_TIME_COLOR=red
 EOF
 
-cat << "EOF"
-####################
-###Extended Tools###
-####################
-EOF
+gum style --foreground="#FFF" --border-foreground="#FFF" --border double --align center --padding "1 1" "Extended Tools"
 if [ "$auto" = "Auto" ]; then
     pacman_packages=(bottom nnn ncdu ssh-tools pueue gping bat navi rust k9s neofetch go)
     for pkg in "${pacman_packages[@]}"; do
         if ! pacman -Qi $pkg &> /dev/null; then
-            echo "Installation de $pkg..."
-            sudo pacman -S $pkg --noconfirm > /dev/null
+            (gum spin --spinner moon --title.foreground="#F00" --title "Installing : $pkg" sudo pacman -S $pkg --noconfirm)
         else
-            echo "$pkg est déjà installé."
+            echo "$pkg est déjà installé." | gum style --foreground="#3498DB" --border-foreground="#3498DB" --border rounded --align center
         fi
     done
     declare -A custom_installs=(
@@ -337,7 +326,7 @@ if [ "$auto" = "Auto" ]; then
         if declare -f "${custom_installs[$key]}" > /dev/null; then
             (gum spin --spinner moon --title.foreground="#F00" --title "Installing : $key" "${custom_installs[$key]}")
         else
-            echo "La fonction ${custom_installs[$key]} n'existe pas pour l'installation de $key."
+            echo "La fonction ${custom_installs[$key]} n'existe pas pour l'installation de $key." | gum style --foreground="#3498DB" --border-foreground="#3498DB" --border rounded --align center
         fi
     done
 else
@@ -373,6 +362,6 @@ else
     done
 fi
 
-echo "Installation complete."
+gum style --foreground="#239B56" --border-foreground="#239B56" --border double --align center --padding "1 2" "Installation complete."
 chsh -s /bin/zsh
 exec zsh -l
