@@ -83,19 +83,23 @@ install_hunt() {
 }
 
 # Function to install DOOIT
-install_dooit() {
-    if ! command -v pip &> /dev/null; then
-        sudo pacman -Sy --needed python-pip
+install_dooit_git() {
+    install_yay
+    if ! pacman -Qi dooit-git &> /dev/null; then
+        yay -S dooit-git
+    else
+        echo "dooit-git is already installed."
     fi
-    pip install dooit || yay -S dooit-git
 }
 
 # Function to install PLOW
 install_plow() {
-    if ! command -v go &> /dev/null; then
-        sudo pacman -Sy --needed go
+    install_yay
+    if ! pacman -Qi plow &> /dev/null; then
+        yay -S plow
+    else
+        echo "plow is already installed."
     fi
-    go install github.com/six-ddc/plow@latest || yay -S plow
 }
 
 # Function to install CATP
@@ -114,13 +118,21 @@ install_curl_impersonate() {
 # Function to install NTFY
 install_ntfy() {
     install_yay
-    yay -S ntfysh-bin
+    if ! pacman -Qi ntfysh-bin &> /dev/null; then
+        yay -S ntfysh-bin
+    else
+        echo "ntfysh-bin is already installed."
+    fi
 }
 
 # Function to install JQP
 install_jqp() {
     install_yay
-    yay -S jqp-bin
+    if ! pacman -Qi jqp-bin &> /dev/null; then
+        yay -S jqp-bin
+    else
+        echo "jqp-bin is already installed."
+    fi    
 }
 
 # Function to install K9S
@@ -149,7 +161,11 @@ install_bottom() {
 # Function to install VIDDY
 install_viddy() {
     install_yay
-    yay -S viddy
+    if ! pacman -Qi viddy &> /dev/null; then
+        yay -S viddy
+    else
+        echo "viddy is already installed."
+    fi  
 }
 
 # Function to install HTMLQ
@@ -163,7 +179,11 @@ install_htmlq() {
 # Function to install SYSZ
 install_sysz() {
     install_yay
-    yay -S sysz
+    if ! pacman -Qi sysz &> /dev/null; then
+        yay -S sysz
+    else
+        echo "sysz is already installed."
+    fi
 }
 
 # Function to install PUEUE
@@ -174,7 +194,11 @@ install_pueue() {
 # Function to install VIZEX
 install_vizex() {
     install_yay
-    yay -S vizex
+    if ! pacman -Qi vizex &> /dev/null; then
+        yay -S vizex
+    else
+        echo "vizex is already installed."
+    fi
 }
 
 # Function to install GPING
@@ -185,7 +209,11 @@ install_gping() {
 # Function to install TEMPMAIL
 install_tempmail() {
     install_yay
-    yay -S tmpmail-git
+    if ! pacman -Qi tmpmail-git &> /dev/null; then
+        yay -S tmpmail-git
+    else
+        echo "tmpmail-git is already installed."
+    fi
 }
 
 # Function to install BAT
@@ -197,7 +225,6 @@ install_bat() {
 install_navi() {
     sudo pacman -S navi
 }
-
 
 #############################################
 #############################################
@@ -311,6 +338,7 @@ do
         25) install_bat ;;
         26) install_navi ;;
         27) 
+            sudo pacman -S bottom nnn ncdu ssh-tools pueue gping bat navi rust k9s neofetch
             install_yay
             install_hunt
             install_dooit
@@ -319,22 +347,12 @@ do
             install_curl_impersonate
             install_ntfy
             install_jqp
-            install_k9s
-            sudo pacman -S nnn
-            sudo pacman -S ncdu
-            sudo pacman -S ssh-tools
-            install_bottom
-            install_neofetch
             install_ots
             install_viddy
             install_htmlq
             install_sysz
-            sudo pacman -S pueue
             install_vizex
-            sudo pacman -S gping
             install_tempmail
-            sudo pacman -S bat
-            sudo pacman -S navi
             ;;
         *) echo "Invalid choice: $choice" ;;
     esac
