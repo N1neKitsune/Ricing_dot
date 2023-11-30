@@ -41,7 +41,7 @@ cat << "EOF"
                                           |___/                                                                                                            
 EOF
 if ! pacman -Qi gum &> /dev/null; then
-    pacman -S --needed --noconfirm gum > /dev/null
+    sudo pacman -S --needed --noconfirm gum > /dev/null
 fi
 
 echo "Auto or Personnalized"
