@@ -31,7 +31,10 @@ cat << "EOF"
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣤⣦⣶⣼⡟⠃⠀⠀⠀⠀⠀⠃⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠻⠿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 EOF
-sudo pacman -S gum --noconfirm > /dev/null
+if ! pacman -Qi gum &> /dev/null; then
+    pacman -S --noconfirm gum > /dev/null
+fi
+
 
 echo "Auto or Personnalized"
 auto=$(gum choose --height 2 --limit 1 Auto Personnalized)
@@ -364,5 +367,9 @@ else
 fi
 
 gum style --foreground="#239B56" --border-foreground="#239B56" --border double --align center --padding "1 2" "Installation complete."
-chsh -s /bin/zsh
-exec zsh -l
+
+if [ "$(getent passwd $USER | cut -d: -f7)" != "/bin/zsh" ]; then
+    chsh -s /bin/zsh
+fi
+    exec zsh -l
+
