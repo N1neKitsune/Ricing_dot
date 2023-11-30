@@ -240,7 +240,7 @@ themes_and_plugins=(
 )
 
 for item in "${themes_and_plugins[@]}"; do
-    read -ra ADDR <<< "$item"A
+    read -ra ADDR <<< "$item"
     if [ ! -d "$ZSH_CUSTOM/${ADDR[0]}" ]; then
         git clone "${ADDR[1]}" "$ZSH_CUSTOM/${ADDR[0]}" --depth=1
     else
