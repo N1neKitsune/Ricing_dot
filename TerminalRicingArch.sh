@@ -348,7 +348,7 @@ if [ "$auto" = "Auto" ]; then
     )
     for key in "${!custom_installs[@]}"; do
         if declare -f "${custom_installs[$key]}" > /dev/null; then
-            (gum spin --spinner moon --title.foreground="#239B56" --title "Installing : $key" "${custom_installs[$key]}")
+            "${custom_installs[$key]}" > /dev/null
         else
             echo "La fonction ${custom_installs[$key]} n'existe pas pour l'installation de $key." | gum style --foreground="#C0392B" --border-foreground="#C0392B" --border rounded --align center
         fi
