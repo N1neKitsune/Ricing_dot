@@ -150,7 +150,10 @@ install_ots() {
     if ! command -v go &> /dev/null; then
         sudo pacman -Sy --needed go
     fi
-    go get -u github.com/sniptt-official/ots
+    export GOBIN="/usr/local/bin"
+    export GOPATH="/usr/local/bin"
+    export PATH="$PATH:$(go env GOBIN):$(go env GOPATH)/bin"
+    sudo go install github.com/sniptt-official/ots@latest
 }
 
 # Function to install BOTTOM
@@ -356,6 +359,9 @@ do
         25) install_bat ;;
         26) install_navi ;;
         27) 
+            export GOBIN="/usr/local/bin"
+            export GOPATH="/usr/local/bin"
+            export PATH="$PATH:$(go env GOBIN):$(go env GOPATH)/bin"
             pacman_packages=(bottom nnn ncdu ssh-tools pueue gping bat navi rust k9s neofetch go)
             for pkg in "${pacman_packages[@]}"; do
                 if ! pacman -Qi $pkg &> /dev/null; then
