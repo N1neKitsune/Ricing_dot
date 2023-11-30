@@ -164,7 +164,6 @@ install_htmlq() {
 
 # Function to install SYSZ
 install_sysz() {
-    install_yay
     if ! command -v sysz &> /dev/null; then
         sudo wget -O /usr/local/bin/sysz https://github.com/joehillen/sysz/releases/latest/download/sysz
         sudo chmod +x /usr/local/bin/sysz
