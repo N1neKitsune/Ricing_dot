@@ -248,7 +248,7 @@ install_miller(){
 ################################################
 
 gum style --foreground="#239B56" --border-foreground="#239B56" --border double --align center --padding "1 1" "Base Package"
-for pkg in zsh fasd peco acpi gum; do
+for pkg in zsh fasd peco acpi gum unzip; do
     if ! pacman -Qi $pkg &> /dev/null; then
         (sudo gum spin --spinner moon --title.foreground="#239B56" --title "Installing : $pkg" -- bash -c "pacman -S --needed --noconfirm $pkg")
     else
